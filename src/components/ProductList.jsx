@@ -2,8 +2,10 @@ import ReactLoading from "react-loading";
 import ProductItem from "./ProductItem";
 import { useGetAllProductsQuery } from "../redux/productsApi";
 import { Container, Row } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 
 const ProductList = () => {
+  const location = useLocation();
   const { data: products, isFetching } = useGetAllProductsQuery();
 
   console.log(products && products);
@@ -21,21 +23,28 @@ const ProductList = () => {
           <ReactLoading
             type={"spin"}
             color={"#000"}
-            height={"10%"}
-            width={"10%"}
+            height={"100px"}
+            width={"100px"}
           />
         )}
 
-        <Row style={{ justifyContent: "space-around", gap: "20px" }}>
+        <Row style={{ gap: "20px", justifyContent: "center" }}>
           {products &&
             products.map(({ id, title, price, description, image }) => (
-              <ProductItem
-                title={title}
-                price={price}
-                description={description}
-                image={image}
-                key={id}
-              />
+              <div key={id} style={{ width: "19rem" }}>
+                <Link
+                  to={`/products/${id}`}
+                  state={{ prevUrl: location }}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <ProductItem
+                    title={title}
+                    price={price}
+                    description={description}
+                    image={image}
+                  />
+                </Link>
+              </div>
             ))}
         </Row>
       </Container>
