@@ -8,8 +8,6 @@ const ProductList = () => {
   const location = useLocation();
   const { data: products, isFetching } = useGetAllProductsQuery();
 
-  console.log(products && products);
-
   return (
     <>
       <Container

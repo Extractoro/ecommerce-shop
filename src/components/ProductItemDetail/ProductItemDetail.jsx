@@ -7,7 +7,6 @@ import s from "./ProductItemDetail.module.css";
 const ProductItemDetail = () => {
   const { productId } = useParams();
   const { data: product, isFetching } = useGetProductQuery(productId);
-  console.log(product && product);
 
   return (
     <>
